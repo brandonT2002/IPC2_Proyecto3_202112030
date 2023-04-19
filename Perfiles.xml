@@ -48,6 +48,146 @@
                 <palabra>bebidas hidratantes</palabra>
             </palabrasClave>
         </perfil>
+        <perfil>
+            <nombre>IA</nombre>
+            <palabrasClave>
+                <palabra>aprendizaje automático</palabra>
+                <palabra>redes neuronales</palabra>
+                <palabra>procesamiento del lenguaje natural</palabra>
+                <palabra>deep learning</palabra>
+                <palabra>visión por computadora</palabra>
+                <palabra>robótica</palabra>
+                <palabra>sistemas expertos</palabra>
+                <palabra>inteligencia artificial</palabra>
+                <palabra>algoritmos</palabra>
+                <palabra>big data</palabra>
+                <palabra>mineria de datos</palabra>
+                <palabra>chatbot</palabra>
+                <palabra>asistente virtual</palabra>
+                <palabra>aprendizaje profundo</palabra>
+                <palabra>aprendizaje reforzado</palabra>
+                <palabra>aprendizaje supervisado</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Música</nombre>
+            <palabrasClave>
+                <palabra>instrumentos</palabra>
+                <palabra>guitarra</palabra>
+                <palabra>batería</palabra>
+                <palabra>piano</palabra>
+                <palabra>voz</palabra>
+                <palabra>notas</palabra>
+                <palabra>ritmo</palabra>
+                <palabra>composición</palabra>
+                <palabra>canción</palabra>
+                <palabra>género musical</palabra>
+                <palabra>melodía</palabra>
+                <palabra>armonía</palabra>
+                <palabra>partitura</palabra>
+                <palabra>concierto</palabra>
+                <palabra>banda</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Cocina</nombre>
+            <palabrasClave>
+                <palabra>recetas</palabra>
+                <palabra>ingredientes</palabra>
+                <palabra>utensilios</palabra>
+                <palabra>cocinar</palabra>
+                <palabra>plato principal</palabra>
+                <palabra>postre</palabra>
+                <palabra>vegetariano</palabra>
+                <palabra>vegano</palabra>
+                <palabra>comida internacional</palabra>
+                <palabra>bebidas</palabra>
+                <palabra>salsas</palabra>
+                <palabra>hornear</palabra>
+                <palabra>asado</palabra>
+                <palabra>mariscos</palabra>
+                <palabra>ensaladas</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Tecnología</nombre>
+            <palabrasClave>
+                <palabra>computadora</palabra>
+                <palabra>smartphone</palabra>
+                <palabra>internet</palabra>
+                <palabra>redes sociales</palabra>
+                <palabra>programación</palabra>
+                <palabra>lenguajes de programación</palabra>
+                <palabra>desarrollo de software</palabra>
+                <palabra>inteligencia artificial</palabra>
+                <palabra>ciberseguridad</palabra>
+                <palabra>big data</palabra>
+                <palabra>aplicaciones móviles</palabra>
+                <palabra>realidad virtual</palabra>
+                <palabra>robotica</palabra>
+                <palabra>drones</palabra>
+                <palabra>computación en la nube</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Entretenimiento</nombre>
+            <palabrasClave>
+                <palabra>peliculas</palabra>
+                <palabra>series</palabra>
+                <palabra>television</palabra>
+                <palabra>musica</palabra>
+                <palabra>conciertos</palabra>
+                <palabra>espectaculos</palabra>
+                <palabra>teatro</palabra>
+                <palabra>comedia</palabra>
+                <palabra>drama</palabra>
+                <palabra>accion</palabra>
+                <palabra>romance</palabra>
+                <palabra>aventura</palabra>
+                <palabra>terror</palabra>
+                <palabra>ciencia ficcion</palabra>
+                <palabra>festival</palabra>
+                <palabra>arte</palabra>
+                <palabra>cultura</palabra>
+                <palabra>celebridades</palabra>
+                <palabra>reality show</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Videojuegos</nombre>
+            <palabrasClave>
+                <palabra>juegos de consola</palabra>
+                <palabra>juegos de PC</palabra>
+                <palabra>juegos de móvil</palabra>
+                <palabra>playstation</palabra>
+                <palabra>xbox</palabra>
+                <palabra>nintendo</palabra>
+                <palabra>steam</palabra>
+                <palabra>epic games</palabra>
+                <palabra>juegos de acción</palabra>
+                <palabra>juegos de aventura</palabra>
+                <palabra>juegos de rol</palabra>
+                <palabra>juegos de estrategia</palabra>
+                <palabra>juegos de deportes</palabra>
+                <palabra>juegos de simulación</palabra>
+                <palabra>juegos de carreras</palabra>
+                <palabra>consolas retro</palabra>
+                <palabra>gamers</palabra>
+                <palabra>streaming de videojuegos</palabra>
+                <palabra>twitch</palabra>
+                <palabra>youtube gaming</palabra>
+                <palabra>Call of Duty</palabra>
+                <palabra>Fortnite</palabra>
+                <palabra>Minecraft</palabra>
+                <palabra>Grand Theft Auto</palabra>
+                <palabra>Assassin's Creed</palabra>
+                <palabra>Red Dead Redemption</palabra>
+                <palabra>League of Legends</palabra>
+                <palabra>Overwatch</palabra>
+                <palabra>World of Warcraft</palabra>
+                <palabra>Valorant</palabra>
+            </palabrasClave>
+        </perfil>
     </perfiles>
     <descartadas>
         <palabra>a</palabra>
