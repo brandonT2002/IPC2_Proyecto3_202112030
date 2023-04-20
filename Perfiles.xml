@@ -188,6 +188,66 @@
                 <palabra>Valorant</palabra>
             </palabrasClave>
         </perfil>
+        <perfil>
+            <nombre>Arte</nombre>
+            <palabrasClave>
+                <palabra>pintura</palabra>
+                <palabra>escultura</palabra>
+                <palabra>dibujo</palabra>
+                <palabra>arte contemporáneo</palabra>
+                <palabra>arte abstracto</palabra>
+                <palabra>arte clásico</palabra>
+                <palabra>expresionismo</palabra>
+                <palabra>impresionismo</palabra>
+                <palabra>renacimiento</palabra>
+                <palabra>arte urbano</palabra>
+                <palabra>instalación</palabra>
+                <palabra>fotografía</palabra>
+                <palabra>arte digital</palabra>
+                <palabra>arte conceptual</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Literatura</nombre>
+            <palabrasClave>
+                <palabra>novela</palabra>
+                <palabra>poesía</palabra>
+                <palabra>cuento</palabra>
+                <palabra>ensayo</palabra>
+                <palabra>prosa</palabra>
+                <palabra>literatura clásica</palabra>
+                <palabra>literatura contemporánea</palabra>
+                <palabra>género literario</palabra>
+                <palabra>autores clásicos</palabra>
+                <palabra>autores contemporáneos</palabra>
+                <palabra>libros de historia</palabra>
+                <palabra>libros de ciencia ficción</palabra>
+                <palabra>libros de misterio</palabra>
+                <palabra>libros de autoayuda</palabra>
+                <palabra>libros infantiles</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Cine</nombre>
+            <palabrasClave>
+                <palabra>películas</palabra>
+                <palabra>actores</palabra>
+                <palabra>directores</palabra>
+                <palabra>cinematográfica</palabra>
+                <palabra>géneros cinematográficos</palabra>
+                <palabra>taquilla</palabra>
+                <palabra>festivales de cine</palabra>
+                <palabra>premios cinematográficos</palabra>
+                <palabra>películas clásicas</palabra>
+                <palabra>películas contemporáneas</palabra>
+                <palabra>documentales</palabra>
+                <palabra>cine de animación</palabra>
+                <palabra>cine de terror</palabra>
+                <palabra>cine de acción</palabra>
+                <palabra>cine independiente</palabra>
+                <palabra>guion</palabra>
+            </palabrasClave>
+        </perfil>
     </perfiles>
     <descartadas>
         <palabra>a</palabra>
