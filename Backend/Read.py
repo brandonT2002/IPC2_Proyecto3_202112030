@@ -38,13 +38,16 @@ class Read:
             user = re.search(r'Usuario: ([^\n\t\s]+)', text)
             socialN = re.search(r'Red social: (\w+)', text)
             message = re.search(r'Red social: \w+\n(.+\n)+', text)
-            message = message.group().split("\n",1)[1].strip()
+            message = message.group().split("\n",1)[1].strip().replace('\t', ' ')
 
             place = placeDate.group(1)
             date = placeDate.group(2)
             hour = placeDate.group(3)
             user = user.group(1)
             socialN = socialN.group(1)
+
+            message = ' '.join(message.splitlines())
+            message = re.sub(r'\s+', ' ', message)
 
             print("Lugar:", place)
             print("Fecha:", date)
