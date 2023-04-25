@@ -33,15 +33,26 @@ class Read:
         print('--- Mensajes ---')
         for text in message:
             text = text.firstChild.data
-            placeDate = re.search(r"Lugar y Fecha: (.+)", text).group(1)
-            user = re.search(r"Usuario: (.+)", text).group(1)
-            socialN = re.search(r"Red social: (.+)", text).group(1)
-            messg = re.split(r"Lugar y Fecha: .+\nUsuario: .+\nRed social: .+\n\n", text)[1]
 
-            print("Lugar y Fecha:", placeDate)
+            placeDate = re.search(r'Lugar y Fecha:\s*(.*?),\s*(\d{2}/\d{2}/\d{4})\s+(\d{2}:\d{2})', text)
+            user = re.search(r'Usuario: ([^\n\t\s]+)', text)
+            socialN = re.search(r'Red social: (\w+)', text)
+            message = re.search(r'Red social: \w+\n(.+\n)+', text)
+            message = message.group().split("\n",1)[1].strip()
+
+            place = placeDate.group(1)
+            date = placeDate.group(2)
+            hour = placeDate.group(3)
+            user = user.group(1)
+            socialN = socialN.group(1)
+
+            print("Lugar:", place)
+            print("Fecha:", date)
+            print("Hora:", hour)
             print("Usuario:", user)
             print("Red social:", socialN)
-            print("Mensaje:", messg)
+            print("Mensaje:", message)
+            print()
 
 
 # Read().readProfiles(open('./Perfiles.xml',encoding='utf-8').read())
