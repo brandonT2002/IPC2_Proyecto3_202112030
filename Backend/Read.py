@@ -1,36 +1,39 @@
 from xml.dom import minidom
+from Builders import *
 import re
 
 class Read:
+    def __init__(self,profiles : list,users : list,discarded : list):
+        self.profiles = profiles
+        self.users = users
+        self.discarded = discarded
+
     def readProfiles(self,content):
         file = minidom.parseString(content)
         Profiles = file.getElementsByTagName('perfiles')[0]
         profiles = Profiles.getElementsByTagName('perfil')
 
-        print('--- Perfiles ---')
         for profile in profiles:
             name = profile.getElementsByTagName('nombre')[0].firstChild.data
             keywords = profile.getElementsByTagName('palabra')
 
-            print(name)
+            pr = Profile(name)
             for keyword in keywords:
                 word = keyword.firstChild.data
-                print(word)
-            print()
+                pr.words.append(word)
+            self.profiles.append(pr)
 
         discarded = file.getElementsByTagName('descartadas')[0]
         discard = discarded.getElementsByTagName('palabra')
-        print('--- Descartadas ---')
         for word in discard:
             word = word.firstChild.data
-            print(word)
+            self.discarded.append(word)
 
     def readMessage(self,content):
         file = minidom.parseString(content)
         messages = file.getElementsByTagName('listaMensajes')[0]
         message = messages.getElementsByTagName('mensaje')
 
-        print('--- Mensajes ---')
         for text in message:
             text = text.firstChild.data
 
@@ -49,16 +52,20 @@ class Read:
             message = ' '.join(message.splitlines())
             message = re.sub(r'\s+', ' ', message)
 
-            print("Lugar:", place)
-            print("Fecha:", date)
-            print("Hora:", hour)
-            print("Usuario:", user)
-            print("Red social:", socialN)
-            print("Mensaje:", message)
-            print()
+            us = self.searchUser(user)
+            if not us:
+                self.users.append(User(user))
+            else:
+                us.messages.append(Message(place,date,hour,message))
+
+    def searchUser(self,user_) -> User:
+        for user in self.users:
+            if user == user_:
+                return user
+        return None
 
 
 # Read().readProfiles(open('./Perfiles.xml',encoding='utf-8').read())
-read = Read()
+# read = Read()
 # read.readProfiles(open('./Perfiles.xml',encoding='utf-8').read())
-read.readMessage(open('./Mensajes.xml',encoding='utf-8').read())
+# read.readMessage(open('./Mensajes.xml',encoding='utf-8').read())
