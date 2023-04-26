@@ -45,7 +45,7 @@ class Read:
 
             place = placeDate.group(1)
             date = placeDate.group(2)
-            hour = placeDate.group(3)
+            time = placeDate.group(3)
             user = user.group(1)
             socialN = socialN.group(1)
 
@@ -53,14 +53,16 @@ class Read:
             message = re.sub(r'\s+', ' ', message)
 
             us = self.searchUser(user)
-            if not us:
-                self.users.append(User(user))
+            if us:
+                us.messages.append(Message(place,date,time,message))
             else:
-                us.messages.append(Message(place,date,hour,message))
+                us = User(user)
+                self.users.append(us)
+                us.messages.append(Message(place,date,time,message))
 
     def searchUser(self,user_) -> User:
         for user in self.users:
-            if user == user_:
+            if user.user == user_:
                 return user
         return None
 
