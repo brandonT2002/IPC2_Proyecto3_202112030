@@ -36,7 +36,7 @@ class Controller:
                 print(msg.content)
             print()
 
-    def countWords(self,text):
+    def countWords(self,text) -> list:
         text = re.sub(r'(?<!\w)\d+(?!\w)','',text)
         text = re.sub(r'[^\w\s]',' ',text)
         words = text.split()
@@ -46,14 +46,8 @@ class Controller:
             if word.lower() not in self.discarded:
                 leakedWords.append(word.lower())
 
-        print(leakedWords)
-        print(len(leakedWords))
+        return leakedWords
 
 ctrl = Controller()
 ctrl.readProfiles()
-# ctrl.viewProfiles()
-# ctrl.viewDiscarded()
-# ctrl.readUsers()
-# ctrl.viewUsers()
-
-ctrl.countWords()
+ctrl.countWords('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
