@@ -1,4 +1,5 @@
 from Read import Read
+import re
 
 class Controller:
     def __init__(self):
@@ -35,9 +36,24 @@ class Controller:
                 print(msg.content)
             print()
 
+    def countWords(self,text):
+        text = re.sub(r'(?<!\w)\d+(?!\w)','',text)
+        text = re.sub(r'[^\w\s]',' ',text)
+        words = text.split()
+
+        leakedWords = []
+        for word in words:
+            if word.lower() not in self.discarded:
+                leakedWords.append(word.lower())
+
+        print(leakedWords)
+        print(len(leakedWords))
+
 ctrl = Controller()
 ctrl.readProfiles()
 # ctrl.viewProfiles()
 # ctrl.viewDiscarded()
-ctrl.readUsers()
-ctrl.viewUsers()
+# ctrl.readUsers()
+# ctrl.viewUsers()
+
+ctrl.countWords()
