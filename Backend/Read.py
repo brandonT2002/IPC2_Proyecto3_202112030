@@ -7,6 +7,7 @@ class Read:
         self.profiles = profiles
         self.users = users
         self.discarded = discarded
+        self.dates: list[str] = []
 
     def readProfiles(self,content):
         file = minidom.parseString(content)
@@ -48,6 +49,7 @@ class Read:
             time = placeDate.group(3)
             user = user.group(1)
             socialN = socialN.group(1)
+            self.dates.append(date) if not date in self.dates else None
 
             message = ' '.join(message.splitlines())
             message = re.sub(r'\s+', ' ', message)
