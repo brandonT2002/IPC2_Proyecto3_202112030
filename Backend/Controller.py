@@ -44,10 +44,25 @@ class Controller:
         leakedWords = []
         for word in words:
             if word.lower() not in self.discarded:
-                leakedWords.append(word.lower())
-
+                leakedWords.append(word.lower().replace(' ',''))
         return leakedWords
+
+    def profileWeight(self,text):
+        text = ' '.join(self.countWords(text))
+        weight = {}
+        for profile in self.profiles:
+            print(f'---{profile.name}---')
+            profile.words = sorted(profile.words,key = len,reverse = True)
+            words_match = []
+            for word in profile.words:
+                aux = re.findall(word,text)
+                words_match.extend(aux)
+                text = re.sub(word,'',text)
+            print(words_match)
+            weight[profile.name] = len(words_match)
+            print()
+        print(weight)
 
 ctrl = Controller()
 ctrl.readProfiles()
-ctrl.countWords('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
+ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm. ropa')
