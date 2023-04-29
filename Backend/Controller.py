@@ -1,18 +1,34 @@
+from datetime import datetime
+import datetime as dtime
 from Read import Read
+from Builders import User
 import re
 
 class Controller:
     def __init__(self):
         self.profiles = []
-        self.users = []
+        self.users: list[User] = []
         self.discarded = []
         self.rd = Read(self.profiles,self.users,self.discarded)
 
-    def readProfiles(self):
-        self.rd.readProfiles(open('./Perfiles.xml',encoding='utf-8').read())
+    def readProfiles(self,path):
+        self.rd.readProfiles(open(path,encoding='utf-8').read())
 
-    def readUsers(self):
-        self.rd.readMessage(open('./Mensajes.xml',encoding='utf-8').read())
+    def sortByDateTime(self,messages):
+        def getDatetime(message):
+            date_string = message.date + ' ' + message.time
+            return dtime.datetime.strptime(date_string, '%d/%m/%Y %H:%M')
+        return sorted(messages,key = getDatetime)
+
+    def sortDatesMessages(self):
+        for user in self.users:
+            user.messages = self.sortByDateTime(user.messages)
+
+    def readUsers(self,path):
+        self.rd.readMessage(open(path,encoding='utf-8').read())
+        self.rd.dates.sort(key = lambda date : dtime.datetime.strptime(date,'%d/%m/%Y'))
+        self.sortDatesMessages()
+        print(self.rd.dates)
 
     def viewProfiles(self):
         print('-----Perfiles-----')
@@ -33,6 +49,7 @@ class Controller:
             print(user.user)
             for msg in user.messages:
                 print('----------')
+                print(msg.date,msg.time)
                 print(msg.content)
             print()
 
@@ -45,24 +62,25 @@ class Controller:
         for word in words:
             if word.lower() not in self.discarded:
                 leakedWords.append(word.lower().replace(' ',''))
-        return leakedWords
+        return {'words':leakedWords,'length':len(leakedWords)}
 
     def profileWeight(self,text):
-        text = ' '.join(self.countWords(text))
+        words = self.countWords(text)
+        text = ' '.join(words.get('words'))
         weight = {}
         for profile in self.profiles:
-            print(f'---{profile.name}---')
-            profile.words = sorted(profile.words,key = len,reverse = True)
+            # print(f'---{profile.name}---')
             words_match = []
             for word in profile.words:
                 aux = re.findall(word,text)
                 words_match.extend(aux)
                 text = re.sub(word,'',text)
-            print(words_match)
-            weight[profile.name] = len(words_match)
-            print()
+            # print(words_match)
+            weight[profile.name] = str(round((len(words_match) / words.get('length')) * 100,2)) + ' %'
         print(weight)
 
 ctrl = Controller()
-ctrl.readProfiles()
-ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm. ropa')
+ctrl.readProfiles('./Perfiles.xml')
+ctrl.readUsers('./Mensajes.xml')
+ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
+#ctrl.viewUsers()
