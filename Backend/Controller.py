@@ -76,7 +76,6 @@ class Controller:
         global_words = {}
 
         for profile in self.profiles:
-            # print(f'---{profile.name}---')
             profile.words = sorted(profile.words,key = len,reverse = True)
             words_match = []
             for word in profile.words:
@@ -89,13 +88,43 @@ class Controller:
                     for i in range(self.searchWord(global_words,word)):
                         words_match.append(word)
             words_match = ' '.join(words_match).split(' ') if len(words_match) > 0 else words_match
-            # print(words_match)
             weight[profile.name] = str(round((len(words_match) / words.get('length')) * 100,2)) + ' %'
-        for k in weight:
-            print(k,'=',weight[k])
+        return weight
+
+    def __msgByUser(self,user: User,date):
+        messages = []
+        if date:
+            for m in user.messages:
+                if m.date == date:
+                    messages.append(self.profileWeight(m.content))
+            return messages
+        else:
+            for m in user.messages:
+                messages.append(self.profileWeight(m.content))
+        return messages
+
+    def __byUser(self,date = None,user = None):
+        users = {}
+        if user:
+            for u in self.users:
+                if u.user == user:
+                    users[user] = self.__msgByUser(u,date)
+                    return users
+        else:
+            for u in self.users:
+                users[u.user] = self.__msgByUser(u,date)
+        return users
+
+    def service1(self,date,user = None):
+        return self.__byUser(date,user)
+
+    def service2(self,user = None):
+        return self.__byUser(user = user)
 
 ctrl = Controller()
 ctrl.readProfiles('./Perfiles.xml')
 ctrl.readUsers('./Mensajes.xml')
-ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
+weights = ctrl.service1('01/04/2023')
+print(weights)
+#ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
 #ctrl.viewUsers()
