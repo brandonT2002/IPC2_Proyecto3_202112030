@@ -28,7 +28,6 @@ class Controller:
         self.rd.readMessage(open(path,encoding='utf-8').read())
         self.rd.dates.sort(key = lambda date : dtime.datetime.strptime(date,'%d/%m/%Y'))
         self.sortDatesMessages()
-        print(self.rd.dates)
 
     def viewProfiles(self):
         print('-----Perfiles-----')
@@ -64,20 +63,36 @@ class Controller:
                 leakedWords.append(word.lower().replace(' ',''))
         return {'words':leakedWords,'length':len(leakedWords)}
 
+    def searchWord(self,globalWords,wordKey):
+        for k in globalWords:
+            if k == wordKey:
+                return globalWords[k]
+        return 0
+
     def profileWeight(self,text):
         words = self.countWords(text)
         text = ' '.join(words.get('words'))
         weight = {}
+        global_words = {}
+
         for profile in self.profiles:
             # print(f'---{profile.name}---')
+            profile.words = sorted(profile.words,key = len,reverse = True)
             words_match = []
             for word in profile.words:
                 aux = re.findall(word,text)
-                words_match.extend(aux)
-                text = re.sub(word,'',text)
+                global_words[word] = self.searchWord(global_words,word) + len(aux)
+                if len(aux) > 0:
+                    words_match.extend(aux)
+                    text = re.sub(word,'',text)
+                else:
+                    for i in range(self.searchWord(global_words,word)):
+                        words_match.append(word)
+            words_match = ' '.join(words_match).split(' ') if len(words_match) > 0 else words_match
             # print(words_match)
             weight[profile.name] = str(round((len(words_match) / words.get('length')) * 100,2)) + ' %'
-        print(weight)
+        for k in weight:
+            print(k,'=',weight[k])
 
 ctrl = Controller()
 ctrl.readProfiles('./Perfiles.xml')
