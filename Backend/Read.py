@@ -8,6 +8,7 @@ class Read:
         self.users = users
         self.discarded = discarded
         self.dates: list[str] = []
+        self.msgTest = {}
 
     def readProfiles(self,content):
         file = minidom.parseString(content)
@@ -30,12 +31,11 @@ class Read:
             word = word.firstChild.data
             self.discarded.append(word)
 
-    def readMessage(self,content):
+    def readMessage(self,content,test):
         file = minidom.parseString(content)
-        messages = file.getElementsByTagName('listaMensajes')[0]
-        message = messages.getElementsByTagName('mensaje')
+        messages = file.getElementsByTagName('mensaje')
 
-        for text in message:
+        for text in messages:
             text = text.firstChild.data
 
             placeDate = re.search(r'Lugar y Fecha:\s*(.*?),\s*(\d{2}/\d{2}/\d{4})\s+(\d{2}:\d{2})', text)
@@ -57,10 +57,17 @@ class Read:
             us = self.searchUser(user)
             if us:
                 us.messages.append(Message(place,date,time,message))
+                if test:
+                    self.msgTest['user'] = us.user
+                    self.msgTest['message'] = us.messages[len(us.messages) - 1]
             else:
                 us = User(user)
                 self.users.append(us)
                 us.messages.append(Message(place,date,time,message))
+                if test:
+                    self.msgTest['user'] = us.user
+                    self.msgTest['message'] = us.messages[len(us.messages) - 1]
+                
 
     def searchUser(self,user_) -> User:
         for user in self.users:
