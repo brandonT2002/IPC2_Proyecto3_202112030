@@ -139,7 +139,33 @@ class Controller:
 
     # Resumen de perfiles y porcentajes de probabilidad, uno o más usuarios
     def service1(self,date,user = None):
-        return self.__byUser(date,user)
+        # return self.__byUser(date,user)
+        return self.getDOTServ1(self.__byUser(date,user))
+
+    def getDOTServ1(self,array):
+        dot = 'digraph pasos {\nrankdir = TB;\n'
+        dot += f'node0 [shape=none, margin=0, label=\n<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">\n'
+        dot += '<tr>\n'
+        dot += '<td BGCOLOR="black" width="175" height="30"><font color="white">Mensaje</font></td>\n'
+        dot += '<td BGCOLOR="black" width="175" height="30"><font color="white">Usuario</font></td>\n'
+        for profile in self.profiles:
+            dot += f'<td BGCOLOR="black" width="175" height="30"><font color="white">% Probabilidad perfil<br/>"{profile.name}"</font></td>\n'
+        dot += '</tr>\n'
+        for user in array:
+            for key,value in user.items():
+                # dot += f'<tr>\n<td border="0" colspan="4" align="left">Usuario: {key}</td>\n</tr>\n'
+                for data in value:
+                    dot += '<tr>\n'
+                    dot += f'<td BGCOLOR="white" width="100" height="30">{data.get("date")} {data.get("time")}</td>\n'
+                    dot += f'<td BGCOLOR="white" width="100" height="30">{key}</td>\n'
+                    for profile in self.profiles:
+                        dot += f'<td BGCOLOR="white" width="100" height="30">{data.get("probabilities").get(f"{profile.name}")} %</td>\n'
+                    # print('\t->',data.get('probabilities').get('Deportista'))
+                    dot += '</tr>\n'
+        dot += '</TABLE>>\n'
+        dot += '];\n'
+        dot += '}'
+        return dot
 
     # Resumen de pesos por usuario, uno o más usuarios
     def service2(self,user = None):
@@ -163,11 +189,11 @@ ctrl.readUsers('./Mensajes.xml')
 print('SERVICE 1')
 weights = ctrl.service1('01/04/2023')
 print(weights)
-print('\nSERVICE 3')
-weights = ctrl.service3('./NuevoMsg.xml')
-print(weights)
-print('\nSERVICE 2')
-weights = ctrl.service2()
-print(weights)
+# print('\nSERVICE 3')
+# weights = ctrl.service3('./NuevoMsg.xml')
+# print(weights)
+# print('\nSERVICE 2')
+# weights = ctrl.service2()
+# print(weights)
 #ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
 #ctrl.viewUsers()
