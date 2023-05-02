@@ -2,8 +2,8 @@
     --font: 'Montserrat', sans-serif;
 
     --primary: #171717;
-    /* --secondary: #2d2d2d; */
     --secondary: #1e1e1e;
+    --gray: #2d2d2d;
     --blue: #0075ff;
     --green: #3dcb8a;
     --red: #d96e57;
@@ -85,7 +85,7 @@ h4{
     }
 }
 .bar{
-    padding: 1rem 10rem;
+    padding: 0rem 10rem;
     background-color: var(--secondary);
     flex-shrink: 1;
 }
@@ -108,37 +108,22 @@ h4{
     font-weight: 400;
 }
 .logo__bold{
-    font-weight: 700;
+    font-weight: 600;
 }
-@media (max-width: 1400px) {
-    .logo__nombre{
-        font-size: 3.6rem;
-    }
-}
-/* @media (max-width: 1190px) {
+@media (max-width: 410px) {
     .logo__name{
-        font-size: 3.4rem;
+        font-weight: 400;
+        font-size: 3rem;
     }
-}
-@media (max-width: 1020px) {
-    .logo__name{
+    .logo__bold{
+        font-weight: 600;
         font-size: 3rem;
     }
 }
-@media (max-width: 970px) {
-    .logo__name{
-        font-size: 2rem;
-    }
-}
-@media (max-width: 860px) {
-    .logo__name{
-        font-size: 1.7rem;
-    }
-} */
 @media (min-width: 768px) {
     .navigation{
         display: flex;
-        gap: 3rem;
+        gap: 2.5rem;
     }
 }
 .navigation__link{
@@ -152,35 +137,68 @@ h4{
     justify-content: space-evenly;
     align-items: center;
 }
+/*Container upload profiles*/
+.containerUpload{
+    display: flex;
+    width: 90%;
+    justify-content: flex-start;
+    padding-top: 11.6rem;
+    padding-left: 2rem;
+    gap: 2rem;
+}
 /* input file */
 .inputfile {
-    width: 0.1px;
-    height: 0.1px;
+    width: 100%;
     opacity: 0;
     overflow: hidden;
     position: absolute;
     z-index: -1;
 }
-.inputfile-2 + label {
-    font-family: var(--fontParrafo);
-    color: var(--blue);
-    border-color: var(--blue);
-    outline: 0;
+.inputfile + label {
+    max-width: 100%;
+    font-size: 1.8rem;
+    font-family: var(--font);
+    text-overflow: ellipsis;
+    white-space: nowrap;
     cursor: pointer;
-    text-align: center;
-    border: 2px solid currentColor;
-    border-radius: 1.2rem;
-    padding-top: .2rem;
-    padding-bottom: .2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0.625rem 1.25rem;
 }
-
-.inputfile-2:focus + label,
-.inputfile-2.has-focus + label,
-.inputfile-2 + label:hover {
+.inputfile-2 + label {
     background-color: var(--blue);
     color: var(--white);
-    border: 2px solid currentColor;
-    transition: .3s;
+    border: 2px solid var(--blue);
+    border-radius: 1rem;
+}
+@media (max-width: 768px) {
+    .containerUpload{
+        width: 100%;
+        padding: 2rem;
+    }
+    .inputfile + label{
+        width: 100%;
+    }
+}
+/* text area input/output */
+.columns{
+    width: 90%;
+    padding: 2rem;
+}
+@media (min-width: 768px) {
+    .columns{
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 2rem;
+    }
+}
+.input{
+    outline: none;
+    min-width: 100%;
+    height: 40rem;
+    resize: none;
+    background-color: var(--gray);
+    color: var(--white);
+    padding: 1rem;
 }

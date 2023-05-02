@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Tecnologías Chapinas</title>
 </head>
 <body>
     <header class="header">
@@ -17,9 +17,9 @@
                     <h1 class="logo__name no-margin center-text">T<span class="logo__bold">C</span></h1>
                 </a>
                 <nav class="navigation">
-                    <a href="#" class="navigation__link">Máquinas</a>
-                    <a href="Elementos.html" class="navigation__link">Elementos</a>
-                    <a href="Compuestos.html" class="navigation__link">Compuestos</a>
+                    <a href="#" class="navigation__link">Perfiles</a>
+                    <a href="Elementos.html" class="navigation__link">Mensajes</a>
+                    <a href="Compuestos.html" class="navigation__link">Peticiones</a>
                     <a href="#modal2" class="navigation__link icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-help" width="25" height="25" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -32,11 +32,15 @@
             </div>
         </div>
     </header>
-    <div class="container containerMachinesCombo">
-        <select name="machine" id="selectMachine" class="selectMachine">
-            <option selected="selected" disabled="">Seleccione una Máquina</option>
-        </select>
-        <button type="button" class="button" onclick="viewMachine()">Ver Máquina</button>
+    <div class="container containerUpload">
+        <input type="file" name="file" id="file" class="inputfile inputfile-2" data-multiple-caption="{count} archivos seleccionados" multiple />
+        <label for="file" class="center-text">
+            <span class="iborrainputfile">Cargar Pefiles</span>
+        </label>
+    </div>
+    <div class="container columns">
+        <textarea name="input" class="input" disabled="true">Input:</textarea>
+        <textarea name="input" class="input" disabled="true">Output:</textarea>
     </div>
 </body>
 </html>
