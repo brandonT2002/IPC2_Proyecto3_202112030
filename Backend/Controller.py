@@ -206,9 +206,28 @@ class Controller:
 
         m = msgTest.get('message')
         probabilities = self.profilesProbability(m.date,m.time,m.content)
-        weights = self.service2(msgTest.get('user'))
-        return weights
-        #print(weights.get('weights'))
+        weights = self.profilesWeights(self.__byUser(user = msgTest.get('user')))
+        # print(weights.get('weights'))
+        return self.getXML(probabilities,weights)
+        # return weights
+
+    def getXML(self,probabilities,weights):
+        xml = '<?xml version="1.0"?>\n'
+        xml += '<respuesta>\n'
+
+        xml += f'\t<fechaHora> {probabilities.get("date")} {probabilities.get("time")} </fechaHora>\n'
+        xml += f'\t<usuario> {list(weights[0].keys())[0]} </usuario>\n'
+        xml += f'\t<perfiles>\n'
+
+        for (profile,probability), (weight) in zip(probabilities.get("probabilities").items(), weights[0].get("weights").values()):
+            xml += f'\t\t<perfil nombre={profile}>\n'
+            xml += f'\t\t\t<porcentajeProbabilidad> {probability} </porcentajeProbabilidad>\n'
+            xml += f'\t\t\t<pesoActual> {weight} </pesoActual>\n'
+            xml += f'\t\t</perfil>\n'
+
+        xml += f'\t</perfiles>\n'
+        xml += '</respuesta>\n'
+        return xml
 
 ctrl = Controller()
 ctrl.readProfiles('./Perfiles.xml')
@@ -216,11 +235,11 @@ ctrl.readUsers('./Mensajes.xml')
 # print('SERVICE 1')
 # weights = ctrl.service1('01/04/2023')
 # print(weights)
-# print('\nSERVICE 3')
-# weights = ctrl.service3('./NuevoMsg.xml')
-# print(weights)
-print('\nSERVICE 2')
-weights = ctrl.service2()
+print('\nSERVICE 3')
+weights = ctrl.service3('./NuevoMsg.xml')
 print(weights)
+#print('\nSERVICE 2')
+#weights = ctrl.service2()
+#print(weights)
 #ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
 #ctrl.viewUsers()
