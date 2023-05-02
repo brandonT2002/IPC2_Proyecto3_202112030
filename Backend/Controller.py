@@ -148,6 +148,7 @@ class Controller:
         dot += '<tr>\n'
         dot += '<td BGCOLOR="black" width="175" height="30"><font color="white">Mensaje</font></td>\n'
         dot += '<td BGCOLOR="black" width="175" height="30"><font color="white">Usuario</font></td>\n'
+        # se agregan los perfiles a la tabla de resumen
         for profile in self.profiles:
             dot += f'<td BGCOLOR="black" width="175" height="30"><font color="white">% Probabilidad perfil<br/>"{profile.name}"</font></td>\n'
         dot += '</tr>\n'
@@ -169,7 +170,33 @@ class Controller:
 
     # Resumen de pesos por usuario, uno o más usuarios
     def service2(self,user = None):
-        return self.profilesWeights(self.__byUser(user = user))
+        # return self.profilesWeights(self.__byUser(user = user))
+        return self.getDOTServ2(self.profilesWeights(self.__byUser(user = user)))
+
+    def getDOTServ2(self,array):
+        dot = 'digraph pasos {\nrankdir = TB;\n'
+        last_node = None
+        for i,user in enumerate(array):
+            dot += f'node{i} [shape=none, margin=0, label=\n<<TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" CELLPADDING="5">\n'
+            for user_ in user.keys():
+                if user_ != 'weights':
+                    # dot += f'-> {user_}\n'
+                    dot += f'<tr>\n<td border="0" colspan="4" align="left">Usuario: {user_}</td>\n</tr>\n'
+            dot += '<tr>\n'
+            dot += '<td BGCOLOR="black" width="175" height="30"><font color="white">Perfiles</font></td>'
+            dot += '<td BGCOLOR="black" width="175" height="30"><font color="white">Pesos</font></td>'
+            dot += '</tr>\n'
+            for profile,weight in user.get('weights').items():
+                dot += '<tr>\n'
+                dot += f'<td BGCOLOR="white" width="100" height="30">{profile}</td>'
+                dot += f'<td BGCOLOR="white" width="100" height="30">{weight}</td>'
+                dot += '</tr>\n'
+            dot += '</TABLE>>\n'
+            dot += '];\n'
+            dot += f'{last_node} -> node{i} [color=transparent];\n' if last_node else ''
+            last_node = f'node{i}'
+        dot += '}'
+        return dot
     
     # Solicitud de mensaje
     def service3(self,path):
@@ -186,14 +213,14 @@ class Controller:
 ctrl = Controller()
 ctrl.readProfiles('./Perfiles.xml')
 ctrl.readUsers('./Mensajes.xml')
-print('SERVICE 1')
-weights = ctrl.service1('01/04/2023')
-print(weights)
+# print('SERVICE 1')
+# weights = ctrl.service1('01/04/2023')
+# print(weights)
 # print('\nSERVICE 3')
 # weights = ctrl.service3('./NuevoMsg.xml')
 # print(weights)
-# print('\nSERVICE 2')
-# weights = ctrl.service2()
-# print(weights)
+print('\nSERVICE 2')
+weights = ctrl.service2()
+print(weights)
 #ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
 #ctrl.viewUsers()
