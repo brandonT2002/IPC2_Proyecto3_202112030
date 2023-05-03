@@ -275,3 +275,68 @@ h4{
     padding: 2rem;
     background-color: var(--gray);
 }
+/* modal */
+.modalmask {
+    position: fixed;
+    font-family: var(--fontParrafo);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    backdrop-filter: blur(1rem);
+    background: rgba(0, 0, 0, 0.753);
+    z-index: 3;
+    opacity:0;
+    -webkit-transition: opacity 400ms ease-in;
+    -moz-transition: opacity 400ms ease-in;
+    transition: opacity 400ms ease-in;
+    pointer-events: none;
+}
+.modalmask:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.close {
+    color: #FFFFFF;
+    line-height: 25px;
+    position: absolute;
+    right: 1px;
+    text-align: center;
+    top: 1px;
+    width: 24px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 2.5rem;
+    border-radius:50%;
+}
+.close:hover{
+    backdrop-filter: blur(25rem);
+    background-color: rgba(255, 255, 255, .2);
+}
+.modalbox{
+    position: relative;
+    width: 60%; 
+    padding: 2rem;
+    background: var(--primary);
+    color: var(--white);
+    border-radius:.6rem;
+    -webkit-transition: all 500ms ease-in;
+    -moz-transition: all 500ms ease-in;
+    transition: all 500ms ease-in;
+    z-index: 2;
+}
+/*Movimientos*/
+.movedown {
+    margin: 0 auto;
+}
+.modalmask:target .movedown{       
+    margin: 5% auto;
+}
+/* documentation */
+.doc {
+    display: block;
+    margin: 0 auto;
+    height: 5.4rem;
+    background-color: var(--gray);
+    border-color: var(--gray);
+}
