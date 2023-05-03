@@ -61,6 +61,20 @@ h3{
 h4{
     font-size: 2.8rem;
 }
+/* scroll */
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(48, 48, 48, 0.692); 
+    border-radius: 10px;
+    background-color: var(--gray);
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+    background-color: var(--secondary);
+}
 /*tulities*/
 .no-margin{
     margin: 0;
