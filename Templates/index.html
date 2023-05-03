@@ -92,15 +92,18 @@
             <h1 class="center-text">Servicio 2</h1>
         </div>
         <div class="container containerUpload">
-            <input type="file" name="file" id="file" class="inputfile inputfile-2" data-multiple-caption="{count} archivos seleccionados" multiple />
-            <label for="file" class="center-text">
-                <span class="iborrainputfile">Cargar Mensajes</span>
-            </label>
+            <select name="machine" id="selectUser1" class="selectDate">
+                <option selected="selected" disabled="">Seleccione un Usuario</option>
+                <option>Todos los Usuarios</option>
+                <option>map001</option>
+                <option>pako1002</option>
+            </select>
+            <button type="button" class="button1">Ver Resumen</button>
+            <button type="button" class="download">
+                <img src="donwload.svg" alt="download">
+            </button>
         </div>
-        <div class="container columns">
-            <textarea name="input2" class="input" disabled="true">Input:</textarea>
-            <textarea name="input2" class="input" disabled="true">Output:</textarea>
-        </div>
+        <div class="container grafo"></div>
     </div>
     <div id="service3">
         <div class="container title">
