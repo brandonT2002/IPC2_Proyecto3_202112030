@@ -12,6 +12,7 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%;
+    scroll-behavior: smooth;
 }
 *,*::before {
     box-sizing: inherit;
@@ -25,6 +26,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    scroll-behavior: smooth;
 }
 /*Chrome, Safari, Edge, Opera*/
 input::-webkit-outer-spin-button,
@@ -59,6 +61,11 @@ h3{
 }
 h4{
     font-size: 2.8rem;
+}
+/* animation scroll */
+a[href^="#"] {
+    scroll-behavior: smooth;
+    transition: all 0.5s cubic-bezier(0.42,0,0.58,1); /* Añade una transición suave */
 }
 /*tulities*/
 .no-margin{
@@ -154,7 +161,6 @@ h4{
 }
 /* input file */
 .inputfile {
-    width: 100%;
     opacity: 0;
     overflow: hidden;
     position: absolute;
@@ -202,7 +208,7 @@ h4{
 .input{
     outline: none;
     min-width: 100%;
-    height: 40rem;
+    height: 65rem;
     resize: none;
     background-color: var(--gray);
     color: var(--white);
