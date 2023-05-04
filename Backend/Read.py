@@ -36,7 +36,7 @@ class Read:
     def addWord(self,pr,keywords):
         for keyword in keywords:
             word = keyword.firstChild.data
-            if word is not pr.words:
+            if word not in pr.words:
                 pr.words.append(word)
 
     def readMessage(self,content,test):
