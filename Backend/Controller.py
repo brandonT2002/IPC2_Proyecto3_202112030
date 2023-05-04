@@ -33,7 +33,7 @@ class Controller:
         return 'Mensajes cargados exitosamente',200
 
     def viewProfiles(self):
-        print('-----Perfiles-----')
+        print('----- PERFILES -----')
         for profile in self.profiles:
             print(f'---{profile.name}---')
             for word in profile.words:
@@ -41,12 +41,12 @@ class Controller:
             print()
 
     def viewDiscarded(self):
-        print('-----Descartados-----')
+        print('----- DESCARTADOS -----')
         for word in self.discarded:
             print(word)
 
     def viewUsers(self):
-        print('-----Usuarios-----')
+        print('----- USUARIOS -----')
         for user in self.users:
             print(user.user)
             for msg in user.messages:
@@ -232,8 +232,11 @@ class Controller:
         xml += '</respuesta>\n'
         return json.dumps({'xml':xml}),200
 
-# ctrl = Controller()
-# ctrl.readProfiles('./Perfiles.xml')
+ctrl = Controller()
+ctrl.readProfiles('./Perfiles_V1.xml')
+ctrl.viewProfiles()
+ctrl.readProfiles('./Perfiles_V2.xml')
+ctrl.viewProfiles()
 # ctrl.readUsers('./Mensajes.xml')
 # print('SERVICE 1')
 # weights = ctrl.service1('01/04/2023')

@@ -19,17 +19,25 @@ class Read:
             name = profile.getElementsByTagName('nombre')[0].firstChild.data
             keywords = profile.getElementsByTagName('palabra')
 
-            pr = Profile(name)
-            for keyword in keywords:
-                word = keyword.firstChild.data
-                pr.words.append(word)
-            self.profiles.append(pr)
+            pr = self.searchProfile(name)
+            if pr:
+                self.addWord(pr,keywords)
+            else:
+                pr = Profile(name)
+                self.addWord(pr,keywords)
+                self.profiles.append(pr)
 
         discarded = file.getElementsByTagName('descartadas')[0]
         discard = discarded.getElementsByTagName('palabra')
         for word in discard:
             word = word.firstChild.data
             self.discarded.append(word)
+
+    def addWord(self,pr,keywords):
+        for keyword in keywords:
+            word = keyword.firstChild.data
+            if word is not pr.words:
+                pr.words.append(word)
 
     def readMessage(self,content,test):
         file = minidom.parseString(content)
@@ -67,16 +75,15 @@ class Read:
                 if test:
                     self.msgTest['user'] = us.user
                     self.msgTest['message'] = us.messages[len(us.messages) - 1]
-                
+
+    def searchProfile(self,profile_) -> Profile:
+        for profile in self.profiles:
+            if profile.name == profile_:
+                return profile
+        return None
 
     def searchUser(self,user_) -> User:
         for user in self.users:
             if user.user == user_:
                 return user
         return None
-
-
-# Read().readProfiles(open('./Perfiles.xml',encoding='utf-8').read())
-# read = Read()
-# read.readProfiles(open('./Perfiles.xml',encoding='utf-8').read())
-# read.readMessage(open('./Mensajes.xml',encoding='utf-8').read())

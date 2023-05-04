@@ -1,7 +1,7 @@
 class Profile:
     def __init__(self,name):
         self.name = name
-        self.words = []
+        self.words: list = []
 
     def __str__(self) -> str:
         return f'Name: {self.name}, Words: {self.words}'

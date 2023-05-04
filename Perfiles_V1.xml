@@ -1,0 +1,237 @@
+<?xml version="1.0"?>
+<configuracion>
+    <perfiles>
+        <perfil>
+            <nombre>Deportista</nombre>
+            <palabrasClave>
+                <palabra>fútbol</palabra>
+                <palabra>balonmano</palabra>
+                <palabra>baloncesto</palabra>
+                <palabra>football</palabra>
+                <palabra>basketball</palabra>
+                <palabra>estadio</palabra>
+                <palabra>selección</palabra>
+                <palabra>liga de campeones</palabra>
+                <palabra>natación</palabra>
+                <palabra>olimpiada</palabra>
+                <palabra>gym</palabra>
+                <palabra>gimnasio</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Cultura Saludable</nombre>
+            <palabrasClave>
+                <palabra>gimnasio</palabra>
+                <palabra>comida saludable</palabra>
+                <palabra>ejercicio</palabra>
+                <palabra>maratón</palabra>
+                <palabra>carrera</palabra>
+                <palabra>entreno</palabra>
+                <palabra>entrenar</palabra>
+                <palabra>entrenamiento</palabra>
+                <palabra>pesas</palabra>
+                <palabra>karate</palabra>
+                <palabra>tae kwon do</palabra>
+                <palabra>boxeo</palabra>
+                <palabra>vitaminas</palabra>
+                <palabra>caminata</palabra>
+                <palabra>caminar</palabra>
+                <palabra>ropa</palabra>
+                <palabra>ropa deportiva</palabra>
+                <palabra>bebida hidratante</palabra>
+                <palabra>bebidas hidratantes</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>IA</nombre>
+            <palabrasClave>
+                <palabra>aprendizaje automático</palabra>
+                <palabra>redes neuronales</palabra>
+                <palabra>procesamiento del lenguaje natural</palabra>
+                <palabra>deep learning</palabra>
+                <palabra>visión por computadora</palabra>
+                <palabra>robótica</palabra>
+                <palabra>sistemas expertos</palabra>
+                <palabra>inteligencia artificial</palabra>
+                <palabra>algoritmos</palabra>
+                <palabra>big data</palabra>
+                <palabra>mineria de datos</palabra>
+                <palabra>chatbot</palabra>
+                <palabra>asistente virtual</palabra>
+                <palabra>aprendizaje profundo</palabra>
+                <palabra>aprendizaje reforzado</palabra>
+                <palabra>aprendizaje supervisado</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Música</nombre>
+            <palabrasClave>
+                <palabra>instrumentos</palabra>
+                <palabra>guitarra</palabra>
+                <palabra>batería</palabra>
+                <palabra>voz</palabra>
+                <palabra>notas</palabra>
+                <palabra>ritmo</palabra>
+                <palabra>composición</palabra>
+                <palabra>canción</palabra>
+                <palabra>armonía</palabra>
+                <palabra>concierto</palabra>
+                <palabra>banda</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Cocina</nombre>
+            <palabrasClave>
+                <palabra>recetas</palabra>
+                <palabra>ingredientes</palabra>
+                <palabra>utensilios</palabra>
+                <palabra>cocinar</palabra>
+                <palabra>plato principal</palabra>
+                <palabra>postre</palabra>
+                <palabra>vegetariano</palabra>
+                <palabra>vegano</palabra>
+                <palabra>comida internacional</palabra>
+                <palabra>bebidas</palabra>
+                <palabra>mariscos</palabra>
+                <palabra>ensaladas</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Tecnología</nombre>
+            <palabrasClave>
+                <palabra>computadora</palabra>
+                <palabra>smartphone</palabra>
+                <palabra>internet</palabra>
+                <palabra>programación</palabra>
+                <palabra>lenguajes de programación</palabra>
+                <palabra>desarrollo de software</palabra>
+                <palabra>inteligencia artificial</palabra>
+                <palabra>ciberseguridad</palabra>
+                <palabra>big data</palabra>
+                <palabra>robotica</palabra>
+                <palabra>drones</palabra>
+                <palabra>computación en la nube</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Entretenimiento</nombre>
+            <palabrasClave>
+                <palabra>peliculas</palabra>
+                <palabra>series</palabra>
+                <palabra>television</palabra>
+                <palabra>musica</palabra>
+                <palabra>espectaculos</palabra>
+                <palabra>teatro</palabra>
+                <palabra>accion</palabra>
+                <palabra>romance</palabra>
+                <palabra>aventura</palabra>
+                <palabra>terror</palabra>
+                <palabra>ciencia ficcion</palabra>
+                <palabra>festival</palabra>
+                <palabra>arte</palabra>
+                <palabra>reality show</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>videojuegos</nombre>
+            <palabrasClave>
+                <palabra>juegos de consola</palabra>
+                <palabra>juegos de PC</palabra>
+                <palabra>juegos de móvil</palabra>
+                <palabra>playstation</palabra>
+                <palabra>xbox</palabra>
+                <palabra>nintendo</palabra>
+                <palabra>epic games</palabra>
+                <palabra>juegos de acción</palabra>
+                <palabra>juegos de aventura</palabra>
+                <palabra>juegos de carreras</palabra>
+                <palabra>consolas retro</palabra>
+                <palabra>gamers</palabra>
+                <palabra>streaming de videojuegos</palabra>
+                <palabra>twitch</palabra>
+                <palabra>youtube gaming</palabra>
+                <palabra>Call of Duty</palabra>
+                <palabra>Fortnite</palabra>
+                <palabra>Minecraft</palabra>
+                <palabra>Grand Theft Auto</palabra>
+                <palabra>Assassin's Creed</palabra>
+                <palabra>World of Warcraft</palabra>
+                <palabra>Valorant</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Arte</nombre>
+            <palabrasClave>
+                <palabra>pintura</palabra>
+                <palabra>escultura</palabra>
+                <palabra>dibujo</palabra>
+                <palabra>arte abstracto</palabra>
+                <palabra>arte clásico</palabra>
+                <palabra>expresionismo</palabra>
+                <palabra>impresionismo</palabra>
+                <palabra>instalación</palabra>
+                <palabra>fotografía</palabra>
+                <palabra>arte digital</palabra>
+                <palabra>arte conceptual</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Literatura</nombre>
+            <palabrasClave>
+                <palabra>novela</palabra>
+                <palabra>poesía</palabra>
+                <palabra>cuento</palabra>
+                <palabra>ensayo</palabra>
+                <palabra>prosa</palabra>
+                <palabra>literatura clásica</palabra>
+                <palabra>literatura contemporánea</palabra>
+                <palabra>género literario</palabra>
+                <palabra>autores clásicos</palabra>
+                <palabra>libros de ciencia ficción</palabra>
+                <palabra>libros de misterio</palabra>
+                <palabra>libros de autoayuda</palabra>
+                <palabra>libros infantiles</palabra>
+            </palabrasClave>
+        </perfil>
+        <perfil>
+            <nombre>Cine</nombre>
+            <palabrasClave>
+                <palabra>películas</palabra>
+                <palabra>actores</palabra>
+                <palabra>directores</palabra>
+                <palabra>cinematográfica</palabra>
+                <palabra>géneros cinematográficos</palabra>
+                <palabra>taquilla</palabra>
+                <palabra>festivales de cine</palabra>
+                <palabra>premios cinematográficos</palabra>
+                <palabra>películas clásicas</palabra>
+                <palabra>cine de terror</palabra>
+                <palabra>cine de acción</palabra>
+                <palabra>cine independiente</palabra>
+                <palabra>guion</palabra>
+            </palabrasClave>
+        </perfil>
+    </perfiles>
+    <descartadas>
+        <palabra>a</palabra>
+        <palabra>un</palabra>
+        <palabra>una</palabra>
+        <palabra>en</palabra>
+        <palabra>para</palabra>
+        <palabra>por</palabra>
+        <palabra>que</palabra>
+        <palabra>no</palabra>
+        <palabra>sino</palabra>
+        <palabra>entre</palabra>
+        <palabra>otro</palabra>
+        <palabra>otra</palabra>
+        <palabra>otros</palabra>
+        <palabra>de</palabra>
+        <palabra>del</palabra>
+        <palabra>nos</palabra>
+        <palabra>sus</palabra>
+        <palabra>su</palabra>
+        <palabra>am</palabra>
+        <palabra>pm</palabra>
+    </descartadas>
+</configuracion>
