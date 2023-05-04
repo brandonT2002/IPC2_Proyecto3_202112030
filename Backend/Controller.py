@@ -1,5 +1,6 @@
 from datetime import datetime
 import datetime as dtime
+import json
 from Read import Read
 from Builders import User
 import re
@@ -13,6 +14,7 @@ class Controller:
 
     def readProfiles(self,path):
         self.rd.readProfiles(open(path,encoding='utf-8').read())
+        return 'Perfiles cargados exitosamente',200
 
     def sortByDateTime(self,messages):
         def getDatetime(message):
@@ -28,6 +30,7 @@ class Controller:
         self.rd.readMessage(open(path,encoding='utf-8').read(),test)
         self.rd.dates.sort(key = lambda date : dtime.datetime.strptime(date,'%d/%m/%Y'))
         self.sortDatesMessages()
+        return 'Mensajes cargados exitosamente',200
 
     def viewProfiles(self):
         print('-----Perfiles-----')
@@ -166,7 +169,7 @@ class Controller:
         dot += '</TABLE>>\n'
         dot += '];\n'
         dot += '}'
-        return dot
+        return json.dumps({'dot':dot}),200
 
     # Resumen de pesos por usuario, uno o más usuarios
     def service2(self,user = None):
@@ -196,7 +199,7 @@ class Controller:
             dot += f'{last_node} -> node{i} [color=transparent];\n' if last_node else ''
             last_node = f'node{i}'
         dot += '}'
-        return dot
+        return json.dumps({'dot':dot}),200
     
     # Solicitud de mensaje
     def service3(self,path):
@@ -227,17 +230,17 @@ class Controller:
 
         xml += f'\t</perfiles>\n'
         xml += '</respuesta>\n'
-        return xml
+        return json.dumps({'xml':xml}),200
 
-ctrl = Controller()
-ctrl.readProfiles('./Perfiles.xml')
-ctrl.readUsers('./Mensajes.xml')
+# ctrl = Controller()
+# ctrl.readProfiles('./Perfiles.xml')
+# ctrl.readUsers('./Mensajes.xml')
 # print('SERVICE 1')
 # weights = ctrl.service1('01/04/2023')
 # print(weights)
-print('\nSERVICE 3')
-weights = ctrl.service3('./NuevoMsg.xml')
-print(weights)
+# print('\nSERVICE 3')
+# weights = ctrl.service3('./NuevoMsg.xml')
+# print(weights)
 #print('\nSERVICE 2')
 #weights = ctrl.service2()
 #print(weights)
