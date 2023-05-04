@@ -31,7 +31,8 @@ class Read:
         discard = discarded.getElementsByTagName('palabra')
         for word in discard:
             word = word.firstChild.data
-            self.discarded.append(word)
+            if word not in self.discarded:
+                self.discarded.append(word)
 
     def addWord(self,pr,keywords):
         for keyword in keywords:

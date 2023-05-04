@@ -232,11 +232,11 @@ class Controller:
         xml += '</respuesta>\n'
         return json.dumps({'xml':xml}),200
 
-ctrl = Controller()
-ctrl.readProfiles('./Perfiles_V1.xml')
-ctrl.viewProfiles()
-ctrl.readProfiles('./Perfiles_V2.xml')
-ctrl.viewProfiles()
+# ctrl = Controller()
+# ctrl.readProfiles('./Perfiles_V1.xml')
+# ctrl.viewDiscarded()
+# ctrl.readProfiles('./Perfiles_V2.xml')
+# ctrl.viewDiscarded()
 # ctrl.readUsers('./Mensajes.xml')
 # print('SERVICE 1')
 # weights = ctrl.service1('01/04/2023')
