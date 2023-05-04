@@ -40,7 +40,7 @@ class Read:
                 self.discarded.append(word)
                 discardedW += 1
 
-        return self.generateXMLResponse(newProfiles, updatedProfiles, discardedW)
+        return self.generateXMLProfiles(newProfiles, updatedProfiles, discardedW)
 
     def addWord(self,pr,keywords):
         for keyword in keywords:
@@ -48,7 +48,7 @@ class Read:
             if word not in pr.words:
                 pr.words.append(word)
 
-    def generateXMLResponse(self, new_profiles_count, updated_profiles_count, discarded_words_count):
+    def generateXMLProfiles(self, new_profiles_count, updated_profiles_count, discarded_words_count):
         doc = minidom.Document()
         
         response_elem = doc.createElement('respuesta')
@@ -66,12 +66,14 @@ class Read:
         discarded_words_elem.appendChild(doc.createTextNode(f"Se han creado {discarded_words_count} nuevas palabras a descartar"))
         response_elem.appendChild(discarded_words_elem)
 
-        return doc.toprettyxml(indent='    ')
+        return doc.toprettyxml(indent='\t')
 
     # LECTURA DE MENSAJES
     def readMessage(self,content,test):
         file = minidom.parseString(content)
         messages = file.getElementsByTagName('mensaje')
+        userCount = 0
+        messagesCount = 0
 
         for text in messages:
             text = text.firstChild.data
@@ -95,6 +97,7 @@ class Read:
             us = self.searchUser(user)
             if us:
                 us.messages.append(Message(place,date,time,message))
+                messagesCount += 1
                 if test:
                     self.msgTest['user'] = us.user
                     self.msgTest['message'] = us.messages[len(us.messages) - 1]
@@ -102,9 +105,29 @@ class Read:
                 us = User(user)
                 self.users.append(us)
                 us.messages.append(Message(place,date,time,message))
+                userCount += 1
+                messagesCount += 1
                 if test:
                     self.msgTest['user'] = us.user
                     self.msgTest['message'] = us.messages[len(us.messages) - 1]
+
+        return self.generateXMLMessages(userCount,messagesCount)
+
+    def generateXMLMessages(self, userCount, messagesCount):
+        doc = minidom.Document()
+        
+        response_elem = doc.createElement('respuesta')
+        doc.appendChild(response_elem)
+
+        new_profiles_elem = doc.createElement('usuarios')
+        new_profiles_elem.appendChild(doc.createTextNode(f'Se procesaron mensajes para {userCount} usuarios distintos'))
+        response_elem.appendChild(new_profiles_elem)
+
+        updated_profiles_elem = doc.createElement('mensajes')
+        updated_profiles_elem.appendChild(doc.createTextNode(f'Se procesaron {messagesCount} mensajes en total'))
+        response_elem.appendChild(updated_profiles_elem)
+
+        return doc.toprettyxml(indent='\t')
 
     def searchProfile(self,profile_) -> Profile:
         for profile in self.profiles:

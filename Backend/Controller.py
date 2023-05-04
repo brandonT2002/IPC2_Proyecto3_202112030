@@ -27,10 +27,10 @@ class Controller:
             user.messages = self.sortByDateTime(user.messages)
 
     def readUsers(self,path,test = False):
-        self.rd.readMessage(open(path,encoding='utf-8').read(),test)
+        xml = self.rd.readMessage(open(path,encoding='utf-8').read(),test)
         self.rd.dates.sort(key = lambda date : dtime.datetime.strptime(date,'%d/%m/%Y'))
         self.sortDatesMessages()
-        return 'Mensajes cargados exitosamente',200
+        return json.dumps({'xml':xml}),200
 
     def viewProfiles(self):
         print('----- PERFILES -----')
@@ -200,7 +200,7 @@ class Controller:
             last_node = f'node{i}'
         dot += '}'
         return json.dumps({'dot':dot}),200
-    
+
     # Solicitud de mensaje
     def service3(self,path):
         self.readUsers(path,True)
