@@ -13,8 +13,8 @@ class Controller:
         self.rd = Read(self.profiles,self.users,self.discarded)
 
     def readProfiles(self,path):
-        self.rd.readProfiles(open(path,encoding='utf-8').read())
-        return 'Perfiles cargados exitosamente',200
+        xml = self.rd.readProfiles(open(path,encoding='utf-8').read())
+        return json.dumps({'xml':xml}),200
 
     def sortByDateTime(self,messages):
         def getDatetime(message):

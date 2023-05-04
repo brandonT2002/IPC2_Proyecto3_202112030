@@ -14,6 +14,8 @@ class Read:
         file = minidom.parseString(content)
         Profiles = file.getElementsByTagName('perfiles')[0]
         profiles = Profiles.getElementsByTagName('perfil')
+        newProfiles = 0
+        updatedProfiles = 0
 
         for profile in profiles:
             name = profile.getElementsByTagName('nombre')[0].firstChild.data
@@ -22,17 +24,23 @@ class Read:
             pr = self.searchProfile(name)
             if pr:
                 self.addWord(pr,keywords)
+                updatedProfiles += 1
             else:
                 pr = Profile(name)
                 self.addWord(pr,keywords)
                 self.profiles.append(pr)
+                newProfiles += 1
 
         discarded = file.getElementsByTagName('descartadas')[0]
         discard = discarded.getElementsByTagName('palabra')
+        discardedW = 0
         for word in discard:
             word = word.firstChild.data
             if word not in self.discarded:
                 self.discarded.append(word)
+                discardedW += 1
+
+        return self.generateXMLResponse(newProfiles, updatedProfiles, discardedW)
 
     def addWord(self,pr,keywords):
         for keyword in keywords:
@@ -40,6 +48,27 @@ class Read:
             if word not in pr.words:
                 pr.words.append(word)
 
+    def generateXMLResponse(self, new_profiles_count, updated_profiles_count, discarded_words_count):
+        doc = minidom.Document()
+        
+        response_elem = doc.createElement('respuesta')
+        doc.appendChild(response_elem)
+
+        new_profiles_elem = doc.createElement('perfilesNuevos')
+        new_profiles_elem.appendChild(doc.createTextNode(f"Se han creado {new_profiles_count} perfiles nuevos"))
+        response_elem.appendChild(new_profiles_elem)
+
+        updated_profiles_elem = doc.createElement('perfilesExistentes')
+        updated_profiles_elem.appendChild(doc.createTextNode(f"Se han actualizado {updated_profiles_count} perfiles existentes"))
+        response_elem.appendChild(updated_profiles_elem)
+
+        discarded_words_elem = doc.createElement('descartadas')
+        discarded_words_elem.appendChild(doc.createTextNode(f"Se han creado {discarded_words_count} nuevas palabras a descartar"))
+        response_elem.appendChild(discarded_words_elem)
+
+        return doc.toprettyxml(indent='    ')
+
+    # LECTURA DE MENSAJES
     def readMessage(self,content,test):
         file = minidom.parseString(content)
         messages = file.getElementsByTagName('mensaje')
