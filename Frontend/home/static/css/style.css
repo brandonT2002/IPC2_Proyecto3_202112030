@@ -219,6 +219,7 @@ h4{
     height: 65rem;
     resize: none;
     background-color: var(--gray);
+    font-size: 1.4rem;
     color: var(--white);
     padding: 1rem;
 }

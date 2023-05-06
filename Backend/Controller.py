@@ -1,20 +1,33 @@
+from os import remove
 from datetime import datetime
 import datetime as dtime
 import json
 from Read import Read
-from Builders import User
+from Builders import User,Profile
 import re
 
 class Controller:
     def __init__(self):
-        self.profiles = []
+        self.path = 'C:\\Users\\Brandon\\VSCode-python-workspace\\IPC2\\IPC2_Proyecto3_202112030\\Frontend\\media\\'
+        self.profiles: list[Profile] = []
         self.users: list[User] = []
         self.discarded = []
         self.rd = Read(self.profiles,self.users,self.discarded)
+        self.inputP = None
+        self.outputP = None
+        self.inputM = None
+        self.outputM = None
+        self.inputR3 = None
+        self.outputR3 = None
 
     def readProfiles(self,path):
-        xml = self.rd.readProfiles(open(path,encoding='utf-8').read())
-        return json.dumps({'xml':xml}),200
+        self.inputP = open(f'{self.path}{path}',encoding='utf-8').read()
+        remove(f'{self.path}{path}')
+        self.outputP = self.rd.readProfiles(self.inputP)
+        return json.dumps({'response':'charge profiles successfully'}),200
+
+    def getProfiles(self):
+        return json.dumps({'inputP':self.inputP,'outputP':self.outputP}),200
 
     def sortByDateTime(self,messages):
         def getDatetime(message):
@@ -27,10 +40,15 @@ class Controller:
             user.messages = self.sortByDateTime(user.messages)
 
     def readUsers(self,path,test = False):
-        xml = self.rd.readMessage(open(path,encoding='utf-8').read(),test)
+        self.inputM = open(f'{self.path}{path}',encoding='utf-8').read()
+        remove(f'{self.path}{path}')
+        self.outputM = self.rd.readMessage(self.inputM,test)
         self.rd.dates.sort(key = lambda date : dtime.datetime.strptime(date,'%d/%m/%Y'))
         self.sortDatesMessages()
-        return json.dumps({'xml':xml}),200
+        return json.dumps({'response':'charge messages successfully'}),200
+
+    def getMessages(self):
+        return json.dumps({'inputM':self.inputM,'outputM':self.outputM})
 
     def viewProfiles(self):
         print('----- PERFILES -----')
@@ -133,17 +151,22 @@ class Controller:
         if user:
             for u in self.users:
                 if u.user == user:
-                    users.append({user:self.__msgByUser(u,date)})
+                    msgs = self.__msgByUser(u,date)
+                    users.append({user:msgs}) if len(msgs) > 0 else None
                     return users
         else:
             for u in self.users:
-                users.append({u.user:self.__msgByUser(u,date)})
+                msgs = self.__msgByUser(u,date)
+                users.append({u.user:msgs}) if len(msgs) > 0 else None
         return users
 
     # Resumen de perfiles y porcentajes de probabilidad, uno o más usuarios
     def service1(self,date,user = None):
-        # return self.__byUser(date,user)
-        return self.getDOTServ1(self.__byUser(date,user))
+        try:
+            return json.dumps({'response':self.__byUser(date,user),'profiles':[profile.name for profile in self.profiles]}),200
+            # return self.getDOTServ1(self.__byUser(date,user)),200
+        except:
+            return json.dumps({'response':None}),200
 
     def getDOTServ1(self,array):
         dot = 'digraph pasos {\nrankdir = TB;\n'
@@ -203,6 +226,7 @@ class Controller:
 
     # Solicitud de mensaje
     def service3(self,path):
+        input = open(f'{self.path}{path}',encoding='utf-8').read()
         self.readUsers(path,True)
         msgTest = self.rd.msgTest
         #print(msgTest.get('user'))
@@ -211,10 +235,10 @@ class Controller:
         probabilities = self.profilesProbability(m.date,m.time,m.content)
         weights = self.profilesWeights(self.__byUser(user = msgTest.get('user')))
         # print(weights.get('weights'))
-        return self.getXML(probabilities,weights)
+        return self.getXML(input,probabilities,weights)
         # return weights
 
-    def getXML(self,probabilities,weights):
+    def getXML(self,input,probabilities,weights):
         xml = '<?xml version="1.0"?>\n'
         xml += '<respuesta>\n'
 
@@ -230,7 +254,13 @@ class Controller:
 
         xml += f'\t</perfiles>\n'
         xml += '</respuesta>\n'
-        return json.dumps({'xml':xml}),200
+        return json.dumps({'inputR3':input,'outputR3':xml}),200
+
+    def getDates(self):
+        return json.dumps({'dates':[date for date in self.rd.dates]}),200
+
+    def getUsers(self):
+        return json.dumps({'users':[user.user for user in self.users]}),200
 
 # ctrl = Controller()
 # ctrl.readProfiles('./Perfiles_V1.xml')

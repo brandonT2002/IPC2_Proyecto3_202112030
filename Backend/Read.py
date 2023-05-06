@@ -7,7 +7,7 @@ class Read:
         self.profiles = profiles
         self.users = users
         self.discarded = discarded
-        self.dates: list[str] = []
+        self.dates = []
         self.msgTest = {}
 
     def readProfiles(self,content):
@@ -96,20 +96,22 @@ class Read:
 
             us = self.searchUser(user)
             if us:
-                us.messages.append(Message(place,date,time,message))
-                messagesCount += 1
-                if test:
-                    self.msgTest['user'] = us.user
-                    self.msgTest['message'] = us.messages[len(us.messages) - 1]
+                if us not in self.users:
+                    us.messages.append(Message(place,date,time,message))
+                    messagesCount += 1
+                    if test:
+                        self.msgTest['user'] = us.user
+                        self.msgTest['message'] = us.messages[len(us.messages) - 1]
             else:
                 us = User(user)
-                self.users.append(us)
-                us.messages.append(Message(place,date,time,message))
-                userCount += 1
-                messagesCount += 1
-                if test:
-                    self.msgTest['user'] = us.user
-                    self.msgTest['message'] = us.messages[len(us.messages) - 1]
+                if us not in self.users:
+                    self.users.append(us)
+                    us.messages.append(Message(place,date,time,message))
+                    userCount += 1
+                    messagesCount += 1
+                    if test:
+                        self.msgTest['user'] = us.user
+                        self.msgTest['message'] = us.messages[len(us.messages) - 1]
 
         return self.generateXMLMessages(userCount,messagesCount)
 

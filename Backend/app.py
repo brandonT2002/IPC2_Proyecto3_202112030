@@ -15,15 +15,31 @@ def ping():
 def readProfiles():
     data = request.json
     return ctrl.readProfiles(
-        data['url']
+        data['filename']
     )
+
+@app.route('/profiles',methods=['GET'])
+def getProfiles():
+    return ctrl.getProfiles()
 
 @app.route('/messages',methods=['POST'])
 def readMessages():
     data = request.json
     return ctrl.readUsers(
-        data['url']
+        data['filename']
     )
+
+@app.route('/messages',methods=['GET'])
+def getMessages():
+    return ctrl.getMessages()
+
+@app.route('/getDates',methods=['GET'])
+def getDates():
+    return ctrl.getDates()
+
+@app.route('/getUsers',methods=['GET'])
+def getUsers():
+    return ctrl.getUsers()
 
 @app.route('/request1',methods=['POST'])
 def request1():
@@ -44,7 +60,7 @@ def request2():
 def request3():
     data = request.json
     return ctrl.service3(
-        data['url']
+        data['filename']
     )
 
 if __name__ == '__main__':
