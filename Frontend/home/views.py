@@ -33,10 +33,6 @@ def home(requests):
             file3 = requests.FILES['file3']
             fs = FileSystemStorage()
             filename = fs.save(file3.name, file3)
-            # `request3` is sending a POST request to the URL `http://127.0.0.1:4000/request3` with a
-            # JSON payload containing the filename of a file uploaded by the user. The response from
-            # the server is then stored in the `request3` variable as a JSON object. The contents of
-            # this variable are then displayed on the webpage as part of the rendered template.
             request3 = json.loads(req.post('http://127.0.0.1:4000/request3',json = {'filename':filename}).text)
             return render(
                 requests,
@@ -56,21 +52,36 @@ def home(requests):
         selectedUser = requests.POST['selectUser1']
         if selectedUser == 'Todos los Usuarios':
             selectedUser = 'NONE'
-            request1 = json.loads(req.post('http://127.0.0.1:4000/request1',json = {'date': selectedDate,'user':selectedUser}).text)
-            print(request1)
-            return render(
-                requests,
-                'home/index.html',
-                {
-                    'status':'working',
-                    'inputP':f'Input:\n\n{profiles.get("inputP")}','outputP':f'Output:\n\n{profiles.get("outputP")}',
-                    'inputM':f'Input:\n\n{messages.get("inputM")}','outputM':f'Output:\n\n{messages.get("outputM")}',
-                    'outputR1':request1.get("response")
-                }
-            )
-    # return render(requests, 'home/index.html', {'status':'working','inputP':f'Input:\n\n{peticion.get("inputP")}','outputP':f'Output:\n\n{peticion.get("outputP")}'})
-    # return render(requests, 'home/index.html', {'status':'working','inputM':f'Input:\n\n{peticion.get("inputM")}','outputM':f'Output:\n\n{peticion.get("outputM")}'})
-    # return render(requests, 'home/index.html', {'status':'working','inputR3':f'Input:\n\n{peticion.get("inputR3")}','outputR3':f'Output:\n\n{peticion.get("outputR3")}'})
+        request1 = json.loads(req.post('http://127.0.0.1:4000/request1',json = {'date': selectedDate,'user':selectedUser}).text)
+        return render(
+            requests,
+            'home/index.html',
+            {
+                'status':'working',
+                'inputP':f'Input:\n\n{profiles.get("inputP")}','outputP':f'Output:\n\n{profiles.get("outputP")}',
+                'inputM':f'Input:\n\n{messages.get("inputM")}','outputM':f'Output:\n\n{messages.get("outputM")}',
+                'outputR1':request1.get("dot"),
+                'dates':dates.get("dates"),
+                'users':users.get("users")
+            }
+        )
+    elif requests.method == 'POST' and 'details2' in requests.POST:
+        selectedUser = requests.POST['selectUser2']
+        if selectedUser == 'Todos los Usuarios':
+            selectedUser = 'NONE'
+        request2 = json.loads(req.post('http://127.0.0.1:4000/request2',json = {'user':selectedUser}).text)
+        return render(
+            requests,
+            'home/index.html',
+            {
+                'status':'working',
+                'inputP':f'Input:\n\n{profiles.get("inputP")}','outputP':f'Output:\n\n{profiles.get("outputP")}',
+                'inputM':f'Input:\n\n{messages.get("inputM")}','outputM':f'Output:\n\n{messages.get("outputM")}',
+                'outputR2':request2.get("dot"),
+                'dates':dates.get("dates"),
+                'users':users.get("users")
+            }
+        )
     return render(
         requests,
         'home/index.html',

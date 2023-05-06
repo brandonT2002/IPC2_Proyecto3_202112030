@@ -163,10 +163,10 @@ class Controller:
     # Resumen de perfiles y porcentajes de probabilidad, uno o más usuarios
     def service1(self,date,user = None):
         try:
-            return json.dumps({'response':self.__byUser(date,user),'profiles':[profile.name for profile in self.profiles]}),200
-            # return self.getDOTServ1(self.__byUser(date,user)),200
+            # return json.dumps({'response':self.__byUser(date,user)}),200
+            return self.getDOTServ1(self.__byUser(date,user))
         except:
-            return json.dumps({'response':None}),200
+            return json.dumps({'dot':None}),200
 
     def getDOTServ1(self,array):
         dot = 'digraph pasos {\nrankdir = TB;\n'

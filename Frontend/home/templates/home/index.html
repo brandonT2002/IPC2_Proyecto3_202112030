@@ -97,37 +97,25 @@
                     <img src="{% static 'svg/donwload.svg' %}" alt="download">
                 </button>
             </div>
-            <div id="dotR1" class="container grafo">
-                <table>
-                    {% for user in outputR1 %}
-                        {% for key, value in user.items %}
-                            <tr>
-                                {% for sdf in value %}
-                                <td>{{key}} => {{sdf.date}}</td>
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    {% endfor %}
-                </table>
-            </div>
+            <div id="dotR1" class="container grafo"></div>
         </div>
         <div id="service2">
             <div class="container title">
                 <h1 class="center-text">Petición 2</h1>
             </div>
             <div class="container containerUpload">
-                <select name="machine" id="selectUser2" class="selectDate">
+                <select name="selectUser2" id="selectUser2" class="selectDate">
                     <option selected="selected">Todos los Usuarios</option>
                     {% for user in users %}
                     <option value="{{user}}">{{user}}</option>
                     {% endfor %}
                 </select>
-                <button type="button" name="" class="button1">Ver Resumen</button>
+                <button type="submit" name="details2" class="button1">Ver Resumen</button>
                 <button type="button" class="download">
                     <img src="{% static 'svg/donwload.svg' %}" alt="download">
                 </button>
             </div>
-            <div class="container grafo"></div>
+            <div id="dotR2" class="container grafo"></div>
         </div>
         <div id="service3">
             <div class="container title">
@@ -161,11 +149,16 @@
             </div>
         </div>
     </form>
-    <!-- <script src="https://d3js.org/d3.v5.min.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
     <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
     <script>
-        d3.select('#dotR1').graphviz().scale(0.8).height(document.getElementById('dotR1').clientHeight).width(800*1.9).renderDot({{dot1}})
-    </script> -->
+        let dot1 = `{{outputR1}}`.replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
+        d3.select('#dotR1').graphviz().scale(0.8).height(document.getElementById('dotR1').clientHeight).width(800*2).renderDot(dot1)
+    </script>
+    <script>
+        let dot2 = `{{outputR2}}`.replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
+        d3.select('#dotR2').graphviz().scale(0.8).height(document.getElementById('dotR2').clientHeight).width(800*2).renderDot(dot2)
+    </script>
 </body>
 </html>
