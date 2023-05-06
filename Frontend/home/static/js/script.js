@@ -1,26 +1,15 @@
-// function uploadProfiles(){
-//     console.log('ENTRA')
-//     let file = document.getElementById("file1").files[0];
-//     if(file) {
-//         let reader = new FileReader()
-//         reader.readAsText(file,'UTF-8')
-//         reader.onload = function(evt) {
-//             let body = {
-//                 data: evt.target.result
-//             }
-//             console.log(body)
-//             // fetch(`${api}/profiles`,{
-//             //     method: 'POST',
-//             //     headers,
-//             //     body: JSON.stringify(body)
-//             // })
-//             // .then(response => response.json())
-//             // .then(response => {
-//             //     console.log(response)
-//             // })
-//             // .catch(error => {})
-//         }
-//         reader.onerror = function(evt) {}
-//     }
-// }
-console.log('SCRIPT')
+function downloadPDF1() {
+    var element = document.getElementById('dotR1');
+    var doc = new jsPDF();
+    var text = element.innerText.trim();
+    doc.text(text,10,10);
+    doc.save('Probabilidades.pdf');
+}
+
+function downloadPDF2() {
+    var element = document.getElementById('dotR2');
+    var doc = new jsPDF();
+    var text = element.innerText.trim();
+    doc.text(text,10,10);
+    doc.save('Pesos.pdf');
+}

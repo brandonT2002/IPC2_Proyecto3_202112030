@@ -93,7 +93,7 @@
                     {% endfor %}
                 </select>
                 <button type="submit" name="details" id="details" class="button1">Ver Detalles</button>
-                <button type="button" class="download">
+                <button type="button" class="download" id="download1" name="download1" onclick="downloadPDF1()">
                     <img src="{% static 'svg/donwload.svg' %}" alt="download">
                 </button>
             </div>
@@ -111,7 +111,7 @@
                     {% endfor %}
                 </select>
                 <button type="submit" name="details2" class="button1">Ver Resumen</button>
-                <button type="button" class="download">
+                <button type="button" class="download" id="download2" name="download2" onclick="downloadPDF2()">
                     <img src="{% static 'svg/donwload.svg' %}" alt="download">
                 </button>
             </div>
@@ -153,9 +153,11 @@
             </div>
         </div>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js" integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/" crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://unpkg.com/@hpcc-js/wasm@0.3.11/dist/index.min.js"></script>
     <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
     <script>
         let dot1 = `{{outputR1}}`.replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
         d3.select('#dotR1').graphviz().scale(0.8).height(document.getElementById('dotR1').clientHeight).width(850*2).renderDot(dot1)
