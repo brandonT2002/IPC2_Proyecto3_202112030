@@ -63,5 +63,11 @@ def request3():
         data['filename']
     )
 
+@app.route('/reset',methods=['POST'])
+def reset():
+    data = request.json
+    ctrl.initObjects()
+    return {'response':'reseted'}
+
 if __name__ == '__main__':
     app.run(debug = True, port = 4000)

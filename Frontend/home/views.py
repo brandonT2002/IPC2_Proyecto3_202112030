@@ -82,6 +82,23 @@ def home(requests):
                 'users':users.get("users")
             }
         )
+    elif requests.method == 'POST' and 'reset' in requests.POST:
+        req.post('http://127.0.0.1:4000/reset',json = {'':''})
+        profiles = json.loads(req.get('http://127.0.0.1:4000/profiles').text)
+        messages = json.loads(req.get('http://127.0.0.1:4000/messages').text)
+        dates = json.loads(req.get('http://127.0.0.1:4000/getDates').text)
+        users = json.loads(req.get('http://127.0.0.1:4000/getUsers').text)
+        return render(
+            requests,
+            'home/index.html',
+            {
+                'status':'working',
+                'inputP':f'Input:\n\n{profiles.get("inputP")}','outputP':f'Output:\n\n{profiles.get("outputP")}',
+                'inputM':f'Input:\n\n{messages.get("inputM")}','outputM':f'Output:\n\n{messages.get("outputM")}',
+                'dates':dates.get("dates"),
+                'users':users.get("users")
+            }
+        )
     return render(
         requests,
         'home/index.html',

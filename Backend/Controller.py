@@ -9,6 +9,9 @@ import re
 class Controller:
     def __init__(self):
         self.path = 'C:\\Users\\Brandon\\VSCode-python-workspace\\IPC2\\IPC2_Proyecto3_202112030\\Frontend\\media\\'
+        self.initObjects()
+
+    def initObjects(self):
         self.profiles: list[Profile] = []
         self.users: list[User] = []
         self.discarded = []
@@ -164,7 +167,9 @@ class Controller:
     def service1(self,date,user = None):
         try:
             # return json.dumps({'response':self.__byUser(date,user)}),200
-            return self.getDOTServ1(self.__byUser(date,user))
+            userB = self.__byUser(date,user)
+            # print(userB)
+            return self.getDOTServ1(userB)
         except:
             return json.dumps({'dot':None}),200
 
@@ -261,21 +266,3 @@ class Controller:
 
     def getUsers(self):
         return json.dumps({'users':[user.user for user in self.users]}),200
-
-# ctrl = Controller()
-# ctrl.readProfiles('./Perfiles_V1.xml')
-# ctrl.viewDiscarded()
-# ctrl.readProfiles('./Perfiles_V2.xml')
-# ctrl.viewDiscarded()
-# ctrl.readUsers('./Mensajes.xml')
-# print('SERVICE 1')
-# weights = ctrl.service1('01/04/2023')
-# print(weights)
-# print('\nSERVICE 3')
-# weights = ctrl.service3('./NuevoMsg.xml')
-# print(weights)
-#print('\nSERVICE 2')
-#weights = ctrl.service2()
-#print(weights)
-#ctrl.profileWeight('Hola amigos, nos vemos hoy en el gym... recuerden que después vamos a entrenar para la carrera 2K del próximo sábado. No olvieden su Ropa Deportiva y sus bebidas Hidratantes. Recuerden que hoy por la noche juega la selección de fútbol, nos vemos en Taco Bell a las 7 pm.')
-#ctrl.viewUsers()

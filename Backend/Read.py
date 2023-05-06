@@ -96,22 +96,20 @@ class Read:
 
             us = self.searchUser(user)
             if us:
-                if us not in self.users:
-                    us.messages.append(Message(place,date,time,message))
-                    messagesCount += 1
-                    if test:
-                        self.msgTest['user'] = us.user
-                        self.msgTest['message'] = us.messages[len(us.messages) - 1]
+                us.messages.append(Message(place,date,time,message))
+                messagesCount += 1
+                if test:
+                    self.msgTest['user'] = us.user
+                    self.msgTest['message'] = us.messages[len(us.messages) - 1]
             else:
                 us = User(user)
-                if us not in self.users:
-                    self.users.append(us)
-                    us.messages.append(Message(place,date,time,message))
-                    userCount += 1
-                    messagesCount += 1
-                    if test:
-                        self.msgTest['user'] = us.user
-                        self.msgTest['message'] = us.messages[len(us.messages) - 1]
+                self.users.append(us)
+                us.messages.append(Message(place,date,time,message))
+                userCount += 1
+                messagesCount += 1
+                if test:
+                    self.msgTest['user'] = us.user
+                    self.msgTest['message'] = us.messages[len(us.messages) - 1]
 
         return self.generateXMLMessages(userCount,messagesCount)
 

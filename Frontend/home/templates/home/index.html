@@ -134,7 +134,7 @@
             </div>
         </div>
         <!-- reset -->
-        <button class="floating-button">Resetear</button>
+        <button type="submit" id="reset" name="reset" class="floating-button">Resetear</button>
         <!-- Sección de Ayuda -->
         <div class="container">
             <div id="help" class="modalmask">
@@ -154,11 +154,11 @@
     <script src="https://unpkg.com/d3-graphviz@3.0.5/build/d3-graphviz.js"></script>
     <script>
         let dot1 = `{{outputR1}}`.replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
-        d3.select('#dotR1').graphviz().scale(0.8).height(document.getElementById('dotR1').clientHeight).width(800*2).renderDot(dot1)
+        d3.select('#dotR1').graphviz().scale(0.8).height(document.getElementById('dotR1').clientHeight).width(850*2).renderDot(dot1)
     </script>
     <script>
         let dot2 = `{{outputR2}}`.replace(/&quot;/g,'"').replace(/&lt;/g,'<').replace(/&gt;/g,'>')
-        d3.select('#dotR2').graphviz().scale(0.8).height(document.getElementById('dotR2').clientHeight).width(800*2).renderDot(dot2)
+        d3.select('#dotR2').graphviz().scale(0.8).height(document.getElementById('dotR2').clientHeight).width(850*2).renderDot(dot2)
     </script>
 </body>
 </html>
